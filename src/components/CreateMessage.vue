@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import fb from '@/firebase/init';
+    import { db } from '@/firebase/init';
 
     export default {
         name: 'CreateMessage',
@@ -26,7 +26,7 @@
         methods: {
             createMessage () {
                 if (this.newMessage) {
-                    fb.collection('messages').add({
+                    db.collection('messages').add({
                         message: this.newMessage,
                         name: this.name,
                         timestamp: Date.now()

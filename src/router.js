@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+import Register from './views/Register.vue'
 import Chat from '@/views/Chat.vue'
 
 Vue.use(Router)
@@ -13,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/Register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/chat',

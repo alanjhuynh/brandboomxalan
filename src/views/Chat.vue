@@ -18,13 +18,17 @@
             <div class="card-action">
                 <CreateMessage :name="name"/>
             </div>
+
+            <button v-on:click="logout" class="btn btn-primary">Logout</button>
         </div>
     </div>
 </template>
 
 <script>
+    import { firebaseApp } from '@/firebase/init';
+
     import CreateMessage from '@/components/CreateMessage';
-    import fb from '@/firebase/init';
+    import { db } from '@/firebase/init';
     import moment from 'moment';
 
     export default {
@@ -39,7 +43,7 @@
             }
         },
         created() {
-            let ref = fb.collection('messages').orderBy('timestamp');
+            let ref = db.collection('messages').orderBy('timestamp');
 
             ref.onSnapshot(snapshot => {
                 snapshot.docChanges().forEach(change => {
@@ -54,7 +58,21 @@
                     }
                 });
             });
-        }
+        },
+        methods: {
+            logout() {
+                firebaseApp.auth().signOut()
+                .then(() => {
+                    alert('Successfully logged out');
+                    this.$router.push('/');
+                })
+                .catch(error => {
+                    alert(error.message);
+                    this.$router.push('/');
+      });
+  },
+},
+
     }
 </script>
 
