@@ -9,13 +9,11 @@
 
     <div class="card login extra-padding">
       <div class="card-body">
-        <h2 class="card-title text-center">Register</h2>
-          <h5 class="card-subtitle text-center">to continue to chat</h5>
-        <form @submit.prevent="register" class="text-center extra-padding">
+        <h2 class="card-title text-center">Reset password</h2>
+          <h5 class="card-subtitle text-center">Send a reset email</h5>
+        <form @submit.prevent="forgot" class="text-center extra-padding">
           <div class="form-group">
             <input type="email" class="form-control" placeholder="Email address" v-model="email">
-            <input type="text" class="form-control" placeholder="Username" v-model="username" required>
-            <input type="password" class="form-control" placeholder="Password" v-model="password">
             <p v-if="errorText" class="text-danger">{{ errorText }}</p>
 
           </div>
@@ -44,22 +42,16 @@ export default {
   data () {
     return {
       email: "",
-      password: "",
-      username: "",
       errorText: null
     }
   },
   methods: {
-    register() {
-      firebaseApp.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then((userCredential) => {
-            var user = userCredential.user;
-            user.updateProfile({
-                displayName: this.username
-            })
-            alert('Successfully registered! Please login.');
+    forgot() {
+        firebaseApp.auth().sendPasswordResetEmail(this.email)
+        .then(() => {
+            // Password reset email sent!
+            alert('Password reset email sent.');
             this.$router.push('/');
-            
         })
         .catch((error) => {
             this.errorText = error.message;

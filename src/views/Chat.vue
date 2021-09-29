@@ -1,4 +1,12 @@
 <template>
+<div>
+    
+        <i class="d-flex far fa-comment-alt fa-3x"></i>
+        <h1> ALAN x BRANDBOOM </h1>
+        <button v-on:click="logout" class="btn btn-primary">Logout</button>
+ 
+    
+
     <div class="chat container">
         <h2 class="text-primary text-center">Real-Time Chat</h2>
         <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
@@ -22,6 +30,7 @@
             <button v-on:click="logout" class="btn btn-primary">Logout</button>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -63,7 +72,6 @@
             logout() {
                 firebaseApp.auth().signOut()
                 .then(() => {
-                    alert('Successfully logged out');
                     this.$router.push('/');
                 })
                 .catch(error => {
