@@ -45,7 +45,7 @@
 
     export default {
         name: 'CreateMessage',
-        props: ['name'],
+        props: ['name', 'currentChatroom'],
         components: {
             EmojiPicker
         },
@@ -57,8 +57,9 @@
         },
         methods: {
             createMessage () {
+                //console.log(this.currentChatroom)
                 if (this.newMessage) {
-                    db.collection('messages').add({
+                    db.collection(`${this.currentChatroom}`).add({
                         message: this.newMessage,
                         name: this.name,
                         timestamp: Date.now()

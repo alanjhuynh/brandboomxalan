@@ -30,6 +30,7 @@
             <div class="d-flex justify-content-start">
               <a href= /Register style="text-decoration: none;"> <b> Create account </b> </a>      
             </div>    
+            
 
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Next</button>
