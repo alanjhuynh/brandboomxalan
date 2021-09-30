@@ -1,31 +1,83 @@
 <template>
+
 <div>
-    
+    <nav class="navbar navbar-light bg-light p-4">
         <i class="d-flex far fa-comment-alt fa-3x"></i>
         <h1> ALAN x BRANDBOOM </h1>
-        <button v-on:click="logout" class="btn btn-primary">Logout</button>
+        <button v-on:click="logout" class="btn btn-secondary">Logout</button>
+    </nav>
 
-        <div>
-            {{ this.currentChatroom }}
-        </div>
-
-        <CreateChatroom />
-
-        <div v-for="chatroom in chatrooms" :key="chatroom.id">
-                        <button v-on:click="crSwitch(chatroom.name)" class="btn btn-primary">{{ chatroom.name }} </button>            
-        </div>
  
+
     
 
-    <div class="chat container">
-        <h2 class="text-primary text-center">Real-Time Chat</h2>
-        <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
+    <!-- <div class="chat container">
         <div class="card">
             <div class="card-body">
-                <p class="nomessages text-secondary" v-if="messages.length == 0">
+                <h1> chatrooms </h1>
+                <div class="list-group">
+            <div v-for="chatroom in chatrooms" :key="chatroom.id">
+                            <button v-if="chatroom.name == currentChatroom" v-on:click="crSwitch(chatroom.name)" type="button" class="list-group-item list-group-item-action active">{{ chatroom.name }} </button> 
+                            <button v-else v-on:click="crSwitch(chatroom.name)" type="button" class="list-group-item list-group-item-action">{{ chatroom.name }} </button>                 
+            </div>
+            
+        </div>
+            </div>
+              <CreateChatroom />
+            </div>
+
+          
+        </div> -->
+
+        
+    
+
+    <div class="chat container p-5">   
+        <h2 class="text-primary text-center"><i class="fas fa-coffee "></i> Hello, {{ name }}. </h2>
+        <h5 class="text-secondary text-center">You are currently in the "{{ this.currentChatroom }}" chatroom.</h5>
+
+    </div>
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+                <div class="chat container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center"> chatrooms </h2>
+                <hr>
+                <div class="list-group">
+                    <div class="messages" v-chat-scroll="{always: false, smooth: true}">
+            <div v-for="chatroom in chatrooms" :key="chatroom.id">
+                            <button v-if="chatroom.name == currentChatroom" v-on:click="crSwitch(chatroom.name)" type="button" class="list-group-item list-group-item-action active">{{ chatroom.name }} </button> 
+                            <button v-else v-on:click="crSwitch(chatroom.name)" type="button" class="list-group-item list-group-item-action">{{ chatroom.name }} </button>                 
+            </div>
+            </div>
+            
+        </div>
+            </div>
+              <CreateChatroom />
+            </div>
+
+          
+        </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="chat container">
+
+        
+
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center"> {{ this.currentChatroom }} </h2>
+                <hr>
+                <h5 class="nomessages text-secondary text-center" v-if="messages.length == 0">
                     <!-- [No messages yet!] -->
-                    Welcome to "{{ this.currentChatroom }}"
-                </p>
+                    <i class="fas fa-comment-slash"></i>
+                    There are currently no messages in the "{{ this.currentChatroom }}" chatroom.
+                </h5>
                 <div class="messages" v-chat-scroll="{always: false, smooth: true}">
                     <div v-for="message in messages" :key="message.id">
                         <span class="text-info">[{{ message.name }}]: </span>
@@ -38,9 +90,18 @@
                 <CreateMessage :name="name" :currentChatroom="currentChatroom" />
             </div>
 
-            <button v-on:click="logout" class="btn btn-primary">Logout</button>
+            
         </div>
     </div>
+        </div>
+
+        <div class="col-lg-2">
+            
+            </div>
+    </div>
+</div>
+
+    
 </div>
 </template>
 
@@ -159,7 +220,13 @@
 }
 
 .messages{
+    height: 300px;
     max-height: 300px;
     overflow: auto;
 }
+
+.test{
+    padding-left: 300px
+}
+
 </style>

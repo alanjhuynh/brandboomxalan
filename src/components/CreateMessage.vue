@@ -1,41 +1,48 @@
 <template>
     <div class="container" style="margin-bottom: 30px">
         <form @submit.prevent="createMessage">
-            <div class="form-group">
-                <input type="text" name="message" class="form-control" placeholder="Enter message..." v-model="newMessage">
-                <p class="text-danger" v-if="errorText">{{ errorText }}</p>
-            </div>
 
-            <button class="btn btn-primary" type="submit" name="action">Submit</button>
-            
-            <emoji-picker @emoji="insert">
-                <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">  
-                    <i class="far fa-smile fa-lg text-primary"></i>     
-                </div>
-                <div slot="emoji-picker" slot-scope="{ emojis, insert }">
-                    <div class="emoji-picker">
-                    
-                    <div>
-                        <div v-for="(emojiGroup, category) in emojis" :key="category">
-                        <h5>{{ category }}</h5>
-                        <div class="emojis">
-                            <span
-                            v-for="(emoji, emojiName) in emojiGroup"
-                            :key="emojiName"
-                            @click="insert(emoji)"
-                            :title="emojiName"
-                            >{{ emoji }}</span>
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-lg-10">
+                      <div class="form-group">
+                        <input type="text" name="message" class="form-control" placeholder="Enter message..." v-model="newMessage">
+                        <p class="text-danger" v-if="errorText">{{ errorText }}</p>
+                      </div>
+                  </div>
+                  <div class="col-lg-1">
+                      <button class="btn btn-primary" type="submit" name="action">Submit</button>
+                  </div>
+                  <div class="col-lg-1">
+                      <emoji-picker @emoji="insert">
+                        <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">  
+                            <i class="far fa-smile fa-2x text-primary"></i>     
                         </div>
+                        <div slot="emoji-picker" slot-scope="{ emojis, insert }">
+                            <div class="emoji-picker">
+                            
+                            <div>
+                                <div v-for="(emojiGroup, category) in emojis" :key="category">
+                                <h5>{{ category }}</h5>
+                                <div class="emojis">
+                                    <span
+                                    v-for="(emoji, emojiName) in emojiGroup"
+                                    :key="emojiName"
+                                    @click="insert(emoji)"
+                                    :title="emojiName"
+                                    >{{ emoji }}</span>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                </div>
-            </emoji-picker>
+                    </emoji-picker>
+                  </div>
+              </div>
+          </div>
 
         </form>
      
-
-    
     </div>
 </template>
 
@@ -159,5 +166,10 @@
 .emoji-picker .emojis span:hover {
   background: #ececec;
   cursor: pointer;
+}
+
+.container-fluid{
+  max-width: 100%;
+  padding: 0;
 }
 </style>

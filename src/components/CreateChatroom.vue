@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container text-center" style="margin-bottom: 30px">
         <button v-on:click="createChatroom" class="btn btn-primary">Create Chatroom</button>
     </div>
 </template>
