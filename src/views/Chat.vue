@@ -23,7 +23,7 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- card title -->
-                            <h2 class="text-center"> chatrooms </h2>
+                            <h4 class="text-center"> chatrooms </h4>
                             <hr>
                             <!-- list of chatrooms -->
                             <!-- if current chatroom, set as active/highlighted -->
@@ -50,7 +50,7 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- card title -->
-                            <h2 class="text-center"> {{ this.currentChatroom }} </h2>
+                            <h4 class="text-center"> {{ this.currentChatroom }} </h4>
                             <hr>
                             <!-- If no messages in the chat, display "no message" message -->
                             <h5 class="nomessages text-secondary text-center" v-if="messages.length == 0">
