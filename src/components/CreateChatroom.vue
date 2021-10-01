@@ -17,16 +17,9 @@
                     db.collection("chatrooms").doc(`${crName}`).set({
                       name: `${crName}`
                     });
-                    // db.collection(`${crName}`).add({
-                    //     message: `Welcome to "${crName}" chatroom`,
-                    //     name: "bot",
-                    //     timestamp: Date.now()
-                    // }).catch(err => {
-                    //     console.log(err);
-                    // });
+               
                 } else {
                     alert("A name must be entered!")
-                    // this.errorText = "A message must be entered!"
                 }
             }
         }

@@ -1,42 +1,55 @@
 <template>
     <div class="container" style="margin-bottom: 30px">
         <form @submit.prevent="createMessage">
-
+          
+          <!-- Container to put input components side by side (text input, submit button, emoji picker) -->
           <div class="container-fluid">
               <div class="row">
+
+                  <!-- text input -->
                   <div class="col-lg-10">
                       <div class="form-group">
                         <input type="text" name="message" class="form-control" placeholder="Enter message..." v-model="newMessage">
                         <p class="text-danger" v-if="errorText">{{ errorText }}</p>
                       </div>
                   </div>
+
+                  <!-- submit button -->
                   <div class="col-lg-1">
                       <button class="btn btn-primary" type="submit" name="action">Submit</button>
                   </div>
+
+                  <!-- emoji picker -->
                   <div class="col-lg-1">
                       <emoji-picker @emoji="insert">
                         <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">  
                             <i class="far fa-smile fa-2x text-primary"></i>     
                         </div>
+
                         <div slot="emoji-picker" slot-scope="{ emojis, insert }">
-                            <div class="emoji-picker">
+                          <div class="emoji-picker">
                             
-                            <div>
+                              <div>
+
                                 <div v-for="(emojiGroup, category) in emojis" :key="category">
-                                <h5>{{ category }}</h5>
-                                <div class="emojis">
-                                    <span
-                                    v-for="(emoji, emojiName) in emojiGroup"
-                                    :key="emojiName"
-                                    @click="insert(emoji)"
-                                    :title="emojiName"
-                                    >{{ emoji }}</span>
+
+                                  <h5>{{ category }}</h5>
+                                  <div class="emojis">
+                                      <span
+                                      v-for="(emoji, emojiName) in emojiGroup"
+                                      :key="emojiName"
+                                      @click="insert(emoji)"
+                                      :title="emojiName"
+                                      >{{ emoji }}</span>
+                                  </div>
+
                                 </div>
-                                </div>
-                            </div>
-                            </div>
+
+                              </div>
+                          </div>
                         </div>
-                    </emoji-picker>
+                      </emoji-picker>
+
                   </div>
               </div>
           </div>
@@ -63,8 +76,8 @@
             }
         },
         methods: {
+            // Create message for currentChatroom in respective firestore collection
             createMessage () {
-                //console.log(this.currentChatroom)
                 if (this.newMessage) {
                     db.collection(`${this.currentChatroom}`).add({
                         message: this.newMessage,
@@ -79,9 +92,10 @@
                     this.errorText = "A message must be entered!"
                 }
             },
+            // insert emoji to the newMessage (text input)
             insert(emoji) {
                 this.newMessage += emoji
-                }
+            }
 
         }
     }

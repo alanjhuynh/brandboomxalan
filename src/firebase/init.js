@@ -1,5 +1,3 @@
-
-
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -14,7 +12,10 @@ var config = {
   appId: "...",
   measurementId: "..."
 };
+
 const firebaseApp = firebase.initializeApp(config);
 firebaseApp.firestore().settings({ timestampsInSnapshots: true });
 const db = firebaseApp.firestore();
+
+//export firebaseApp for auth and db for firestore
 export {firebaseApp, db};
